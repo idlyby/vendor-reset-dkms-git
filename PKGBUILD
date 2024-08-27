@@ -2,7 +2,7 @@
 
 _pkgbase=vendor-reset
 pkgname=vendor-reset-dkms-git
-pkgver=r94.6140e2f
+pkgver=r117.084881c
 pkgrel=1
 pkgdesc="Kernel module for vendor-specific hardware reset routines."
 arch=('any')
@@ -28,4 +28,7 @@ package() {
 
     install -d "${pkgdir}/usr/src/${_pkgbase}-${pkgver}"/
     cp -r "${srcdir}/${_pkgbase}"/* "${pkgdir}/usr/src/${_pkgbase}-${pkgver}"/
+
+    install -d "${pkgdir}/etc/udev/rules.d"/
+    cp "${srcdir}/${_pkgbase}/udev/99-vendor-reset.rules" "${pkgdir}/etc/udev/rules.d"/
 }
