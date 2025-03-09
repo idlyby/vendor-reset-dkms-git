@@ -11,8 +11,18 @@ license=('GPL2')
 depends=('dkms')
 makedepends=('git')
 conflicts=('vendor-reset-git')
-source=('git+https://github.com/gnif/vendor-reset.git')
-md5sums=('SKIP')
+source=(
+    'git+https://github.com/gnif/vendor-reset.git'
+    'fix-moved-includes.patch::https://github.com/gnif/vendor-reset/pull/86.patch'
+    )
+md5sums=(
+    'SKIP'
+    'SKIP'
+    )
+
+prepare() {
+    patch -d "${srcdir}/$_pkgbase" -i "${srcdir}/fix-moved-includes.patch" -p1
+}
 
 pkgver() {
     cd "${_pkgbase}"
